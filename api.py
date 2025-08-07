@@ -10,7 +10,7 @@ Run with:  uvicorn api:app --reload --port 8000
 """
 
 from __future__ import annotations
-import hashlib, random, json, pickle
+import hashlib, random, json, pickle, datetime
 from pathlib import Path
 from typing import List, Dict, Literal
 
@@ -559,4 +559,23 @@ def _model_yearly_production(region: str, model_name: str, scenario: str, year: 
     return mdl([year])[0]
 
 @app.get("/")
-def root(): return {"status": "Hydrogen dummy API running"}
+def root(): 
+    return {
+        "status": "Hydrogen API running",
+        "version": "1.0.0",
+        "endpoints": [
+            "/available_regions",
+            "/scenarios", 
+            "/models",
+            "/annual_forecast",
+            "/cumulative_forecast",
+            "/forecast",
+            "/optimize",
+            "/map",
+            "/global_choropleth"
+        ]
+    }
+
+@app.get("/health")
+def health():
+    return {"status": "healthy", "timestamp": datetime.datetime.now().isoformat()}

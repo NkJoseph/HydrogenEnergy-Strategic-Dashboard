@@ -300,7 +300,9 @@ def make_app(theme: str = DEFAULT_THEME, language: str = DEFAULT_LANGUAGE) -> da
             "https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
         ], 
         suppress_callback_exceptions=True,
-        title="Global Hydrogen Production Simulation Tool"
+        title="Global Hydrogen Production Simulation Tool",
+        server_url='/',
+        routes_pathname_prefix='/'
     )
     server = app.server
 
@@ -946,4 +948,7 @@ init_language = flask.request.args.get("language", DEFAULT_LANGUAGE) if flask.ha
 app = make_app(init_theme, init_language)
 
 if __name__ == "__main__":
-    app.run(port=8050, debug=True)
+    import os
+    port = int(os.environ.get("PORT", 8050))
+    debug = os.environ.get("DEBUG", "False").lower() == "true"
+    app.run(host="0.0.0.0", port=port, debug=debug)
