@@ -1,0 +1,34 @@
+# ───────── Core back-end ─────────
+fastapi==0.111.0
+uvicorn[standard]==0.29.0
+pydantic>=2.7,<2.8
+gunicorn
+
+# ───────── Front-end ────────────
+dash==2.18.0
+dash-bootstrap-components==1.6.0
+plotly==5.23.0
+
+# ───────── PyTorch & friends ────
+torch>=2.6.0                 # Updated to current version
+torchdiffeq==0.2.3           # pre-built wheel works with NumPy 1.26
+stable-baselines3==2.3.2
+gym==0.26.2
+
+# ───────── Data / ML utils ─────
+numpy>=1.26.4                # Updated to allow newer versions
+pandas>=2.2.2
+scikit-learn>=1.4.2          # Updated to allow newer versions
+
+# ───────── Visualisation ───────
+matplotlib>=3.9.0
+seaborn>=0.13.2
+
+# ───────── HTTP utils ──────────
+requests>=2.32.3
+
+# ───────── Lightweight config ──
+config==0.5.1
+
+# ───────── Testing (optional) ──
+pytest>=8.1.2
