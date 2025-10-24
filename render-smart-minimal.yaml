@@ -1,0 +1,28 @@
+# Smart minimal Render.com configuration - keeps functionality
+services:
+  - type: web
+    name: hydrogen-api-smart-minimal
+    env: python
+    plan: free
+    buildCommand: pip install -r requirements-smart-minimal.txt
+    startCommand: uvicorn api:app --host 0.0.0.0 --port $PORT --workers 1 --log-level info
+    healthCheckPath: /health
+    envVars:
+      - key: PORT
+        value: 8000
+      - key: PYTHONUNBUFFERED
+        value: "1"
+  - type: web
+    name: hydrogen-dashboard-smart-minimal
+    env: python
+    plan: free
+    buildCommand: pip install -r requirements-smart-minimal.txt
+    startCommand: python start_dashboard_render.py
+    healthCheckPath: /
+    envVars:
+      - key: PORT
+        value: 8050
+      - key: PYTHONUNBUFFERED
+        value: "1"
+      - key: HYDROGEN_API_URL
+        value: https://hydrogen-api-smart-minimal.onrender.com

@@ -1,0 +1,68 @@
+# Smart minimal .dockerignore - keeps models, excludes unnecessary files
+# Exclude virtual environments
+dashboard-env/
+venv/
+env/
+
+# Exclude IDE files
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Exclude OS files
+.DS_Store
+Thumbs.db
+
+# Exclude logs
+*.log
+logs/
+
+# Exclude temporary files
+*.tmp
+*.temp
+__pycache__/
+*.pyc
+*.pyo
+
+# Exclude test files
+tests/
+test_*.py
+*_test.py
+
+# Exclude documentation
+*.md
+docs/
+
+# Exclude deployment files
+Dockerfile*
+docker-compose*
+*.yaml
+*.yml
+*.json
+*.bat
+*.sh
+
+# Exclude backup files
+*_backup.py
+*.bak
+
+# Exclude zip files
+*.zip
+*.tar.gz
+
+# Exclude large data files (keep models!)
+# *.csv
+# *.xlsx
+# *.xls
+
+# Keep model files - they're essential!
+# *.pt
+# *.pth
+# *.h5
+# *.pkl
+# *.joblib
+
+# Exclude assets
+assets/
+static/

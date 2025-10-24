@@ -1,0 +1,37 @@
+# Smart minimal requirements - keeps functionality, reduces size
+# Core back-end
+fastapi==0.111.0
+uvicorn[standard]==0.29.0
+pydantic==2.7.4
+gunicorn
+
+# Front-end
+dash==2.18.0
+dash-bootstrap-components==1.6.0
+plotly==5.23.0
+
+# PyTorch (CPU-only, smaller)
+torch==2.1.0+cpu
+# Keep torchdiffeq for neural ODE models
+torchdiffeq==0.2.3
+
+# Data processing (essential)
+numpy==1.26.4
+pandas==2.2.2
+scikit-learn==1.4.2
+
+# Visualization (essential)
+matplotlib==3.9.0
+# Keep seaborn for better plots
+seaborn==0.13.2
+
+# HTTP utilities
+requests==2.32.3
+
+# Configuration
+config==0.5.1
+
+# Remove only the heaviest packages:
+# - stable-baselines3 (saves ~100MB) - can be added back if needed
+# - gym (saves ~50MB) - can be added back if needed
+# - pytest (saves ~10MB) - testing only
