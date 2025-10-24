@@ -1,0 +1,59 @@
+version: '3.8'
+
+services:
+  # API Service
+  api:
+    build: .
+    container_name: hydrogen-api
+    ports:
+      - "8000:8000"
+    environment:
+      - HYDROGEN_API_URL=http://api:8000
+    volumes:
+      - ./pretrained-models:/app/pretrained-models
+      - ./dataset:/app/dataset
+      - ./processed_data:/app/processed_data
+    command: python start_api.py
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8000/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 40s
+    networks:
+      - hydrogen-network
+
+  # Dashboard Service
+  dashboard:
+    build: .
+    container_name: hydrogen-dashboard
+    ports:
+      - "8050:8050"
+    environment:
+      - HYDROGEN_API_URL=http://api:8000
+      - PORT=8050
+    depends_on:
+      api:
+        condition: service_healthy
+    volumes:
+      - ./pretrained-models:/app/pretrained-models
+      - ./dataset:/app/dataset
+      - ./processed_data:/app/processed_data
+    command: python dashboard.py
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8050/"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 40s
+    networks:
+      - hydrogen-network
+
+networks:
+  hydrogen-network:
+    driver: bridge
+
+volumes:
+  pretrained-models:
+  dataset:
+  processed_data:

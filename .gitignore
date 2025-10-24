@@ -19,34 +19,106 @@ wheels/
 *.egg-info/
 .installed.cfg
 *.egg
-MANIFEST
 
 # Virtual environments
-.env
-.venv
-env/
-venv/
-ENV/
-env.bak/
-venv.bak/
 dashboard-env/
+venv/
+env/
+ENV/
+.venv/
+.env/
 
 # IDE
 .vscode/
 .idea/
 *.swp
 *.swo
+*~
 
 # OS
 .DS_Store
 Thumbs.db
+desktop.ini
+AppData/
+
+# Git
+.git/
 
 # Logs
 *.log
+logs/
+global_analysis.log
 
 # Temporary files
 *.tmp
 *.temp
+.tmp/
 
-# Model files (if too large)
-# pretrained-models/*.pt 
+# Test files
+test_*.py
+tests/
+*_test.py
+*_backup.py
+*_fixed.py
+*_v.py
+
+# Backup files
+*_backup.py
+*.backup
+dashboard_backup.py
+api_backup.py
+api_fixed.py
+api first v.py
+dashboard-first satisfactory.py
+
+# Zip files
+*.zip
+hydrogen_dashboard_v2.zip
+hydrogen_dashboard.zip
+
+# Jupyter notebooks
+*.ipynb
+.ipynb_checkpoints/
+
+# Environment files
+.env
+.env.local
+.env.production
+
+# Deployment scripts (keep main ones, exclude duplicates)
+deploy_online.py
+quick_status_check.py
+
+# Analysis scripts (development only)
+global analysis.py
+regional analysis.py
+analysis_wrappers.py
+simple_train_models.py
+train_models.py
+preprocess_data.py
+
+# Large model files (exclude for GitHub - too large)
+pretrained-models/
+processed_data/
+
+# Keep important files
+!requirements.txt
+!render.yaml
+!runtime.txt
+!Procfile
+!config.py
+!api.py
+!dashboard.py
+!start_api.py
+!README.md
+!DEPLOYMENT.md
+!DOCKER_DEPLOYMENT.md
+!RENDER_DEPLOYMENT.md
+!Dockerfile*
+!docker-compose*.yml
+!.dockerignore
+!deploy_render.*
+!render_start.py
+!start_render.py
+!requirements-render*.txt
+!nginx.conf

@@ -1,0 +1,102 @@
+version: '3.8'
+
+services:
+  # API Service
+  api:
+    build:
+      context: .
+      dockerfile: Dockerfile.prod
+    container_name: hydrogen-api-prod
+    restart: unless-stopped
+    ports:
+      - "8000:8000"
+    environment:
+      - HYDROGEN_API_URL=http://api:8000
+      - PYTHONUNBUFFERED=1
+    volumes:
+      - pretrained-models:/app/pretrained-models
+      - dataset:/app/dataset
+      - processed-data:/app/processed_data
+    command: python start_api.py
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8000/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 40s
+    networks:
+      - hydrogen-network
+    deploy:
+      resources:
+        limits:
+          memory: 2G
+          cpus: '1.0'
+        reservations:
+          memory: 1G
+          cpus: '0.5'
+
+  # Dashboard Service
+  dashboard:
+    build:
+      context: .
+      dockerfile: Dockerfile.prod
+    container_name: hydrogen-dashboard-prod
+    restart: unless-stopped
+    ports:
+      - "8050:8050"
+    environment:
+      - HYDROGEN_API_URL=http://api:8000
+      - PORT=8050
+      - PYTHONUNBUFFERED=1
+    depends_on:
+      api:
+        condition: service_healthy
+    volumes:
+      - pretrained-models:/app/pretrained-models
+      - dataset:/app/dataset
+      - processed-data:/app/processed_data
+    command: python dashboard.py
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8050/"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 40s
+    networks:
+      - hydrogen-network
+    deploy:
+      resources:
+        limits:
+          memory: 1G
+          cpus: '0.5'
+        reservations:
+          memory: 512M
+          cpus: '0.25'
+
+  # Nginx reverse proxy (optional)
+  nginx:
+    image: nginx:alpine
+    container_name: hydrogen-nginx
+    restart: unless-stopped
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - ./nginx.conf:/etc/nginx/nginx.conf:ro
+    depends_on:
+      - api
+      - dashboard
+    networks:
+      - hydrogen-network
+
+networks:
+  hydrogen-network:
+    driver: bridge
+
+volumes:
+  pretrained-models:
+    driver: local
+  dataset:
+    driver: local
+  processed-data:
+    driver: local

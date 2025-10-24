@@ -1,0 +1,34 @@
+# Render.com optimized requirements
+# Core back-end
+fastapi==0.111.0
+uvicorn[standard]==0.29.0
+pydantic>=2.7,<2.8
+gunicorn
+
+# Front-end
+dash==2.18.0
+dash-bootstrap-components==1.6.0
+plotly==5.23.0
+
+# PyTorch (CPU-only for Render)
+torch==2.1.0+cpu --index-url https://download.pytorch.org/whl/cpu
+torchdiffeq==0.2.3
+
+# Data processing
+numpy>=1.26.4
+pandas>=2.2.2
+scikit-learn>=1.4.2
+
+# Visualization
+matplotlib>=3.9.0
+seaborn>=0.13.2
+
+# HTTP utilities
+requests>=2.32.3
+
+# Configuration
+config==0.5.1
+
+# Optional ML libraries (lighter versions)
+# stable-baselines3==2.3.2  # Commented out for smaller build
+# gym==0.26.2                # Commented out for smaller build

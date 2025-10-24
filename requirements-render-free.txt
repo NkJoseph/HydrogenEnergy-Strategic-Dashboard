@@ -1,0 +1,35 @@
+# Render.com Free Tier Optimized Requirements
+# Minimal dependencies for free tier deployment
+
+# Core back-end
+fastapi==0.111.0
+uvicorn[standard]==0.29.0
+pydantic>=2.7,<2.8
+
+# Front-end
+dash==2.18.0
+dash-bootstrap-components==1.6.0
+plotly==5.23.0
+
+# PyTorch CPU-only (smaller, faster)
+torch==2.1.0+cpu --index-url https://download.pytorch.org/whl/cpu
+
+# Essential data processing
+numpy>=1.26.4
+pandas>=2.2.2
+
+# Visualization
+matplotlib>=3.9.0
+
+# HTTP utilities
+requests>=2.32.3
+
+# Configuration
+config==0.5.1
+
+# Removed heavy dependencies for free tier:
+# - torchdiffeq (too heavy)
+# - stable-baselines3 (too heavy) 
+# - gym (too heavy)
+# - scikit-learn (optional, can be added if needed)
+# - seaborn (optional)
