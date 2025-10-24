@@ -1,0 +1,75 @@
+# Vercel ignore file
+# Exclude large files from Vercel deployment
+
+# Large model files
+pretrained-models/
+processed_data/
+*.pt
+*.pkl
+*.pth
+*.model
+
+# Large data files
+*.zip
+*.tar.gz
+*.csv
+dataset/
+
+# Virtual environments
+dashboard-env/
+venv/
+env/
+.venv/
+
+# IDE files
+.vscode/
+.idea/
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
+logs/
+
+# Temporary files
+*.tmp
+*.temp
+.tmp/
+
+# Test files
+test_*.py
+tests/
+*_test.py
+
+# Backup files
+*_backup.py
+*.backup
+
+# Docker files (not needed for Vercel)
+Dockerfile*
+docker-compose*.yml
+.dockerignore
+
+# Documentation (optional)
+*.md
+README.md
+DEPLOYMENT.md
+DOCKER_DEPLOYMENT.md
+RENDER_DEPLOYMENT.md
+CHINA_DEPLOYMENT_GUIDE.md
+RENDER_BUILD_FIX.md
+RENDER_FREE_TIER_GUIDE.md
+RENDER_PORT_FIX.md
+RENDER_BLUEPRINT_GUIDE.md
+DOCKER_TROUBLESHOOTING.md
+RAILWAY_OPTIMIZATION.md
+CHINA_PAYMENT_OPTIONS.md
+VERCEL_OPTIMIZATION.md
+
+# Scripts (optional)
+deploy_*.bat
+deploy_*.sh
+*.bat
+*.sh
