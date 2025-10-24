@@ -1,0 +1,16 @@
+# Ultra-minimal Render.com configuration for 4GB limit
+services:
+  - type: web
+    name: hydrogen-dashboard-ultra-minimal
+    env: python
+    plan: free
+    buildCommand: pip install -r requirements-ultra-minimal.txt
+    startCommand: python dashboard.py
+    healthCheckPath: /
+    envVars:
+      - key: PORT
+        value: 8080
+      - key: PYTHONUNBUFFERED
+        value: "1"
+      - key: HYDROGEN_API_URL
+        value: https://hydrogen-api.onrender.com

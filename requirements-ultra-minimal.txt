@@ -1,0 +1,30 @@
+# Ultra-minimal requirements for 4GB limit
+# Core back-end
+fastapi==0.111.0
+uvicorn[standard]==0.29.0
+pydantic==2.7.4
+
+# Front-end
+dash==2.18.0
+dash-bootstrap-components==1.6.0
+plotly==5.23.0
+
+# Essential ML (CPU-only, minimal)
+torch==2.1.0+cpu
+numpy==1.26.4
+pandas==2.2.2
+scikit-learn==1.4.2
+
+# Essential visualization
+matplotlib==3.9.0
+
+# HTTP utils
+requests==2.32.3
+
+# Remove heavy packages:
+# - torchdiffeq (saves ~50MB)
+# - stable-baselines3 (saves ~100MB)
+# - gym (saves ~50MB)
+# - seaborn (saves ~20MB)
+# - pytest (saves ~10MB)
+# - config (saves ~5MB)
