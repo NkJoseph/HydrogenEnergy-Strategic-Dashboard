@@ -3,41 +3,28 @@ services:
   - type: web
     name: hydrogen-api
     env: python
-    buildCommand: |
-      pip install --upgrade pip
-      pip install -r requirements.txt
-      python -c "import torch; print('PyTorch version:', torch.__version__)"
-    startCommand: uvicorn api:app --host 0.0.0.0 --port $PORT --workers 1 --log-level info
+    buildCommand: pip install -r requirements.txt
+    startCommand: uvicorn api:app --host 0.0.0.0 --port $PORT
     envVars:
       - key: PYTHON_VERSION
         value: 3.11.0
       - key: PORT
         value: 8000
-      - key: PYTHONUNBUFFERED
-        value: 1
-      - key: HYDROGEN_API_URL
-        value: https://hydrogen-api.onrender.com
     healthCheckPath: /health
     plan: starter
-    region: oregon
 
   # Frontend Dashboard Service  
   - type: web
     name: hydrogen-dashboard
     env: python
-    buildCommand: |
-      pip install --upgrade pip
-      pip install -r requirements.txt
+    buildCommand: pip install -r requirements.txt
     startCommand: python start_dashboard_render.py
     envVars:
       - key: PYTHON_VERSION
         value: 3.11.0
       - key: PORT
         value: 8050
-      - key: PYTHONUNBUFFERED
-        value: 1
       - key: HYDROGEN_API_URL
         value: https://hydrogen-api.onrender.com
     healthCheckPath: /
     plan: starter
-    region: oregon 
