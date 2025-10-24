@@ -5,8 +5,7 @@ services:
     env: python
     buildCommand: |
       pip install --upgrade pip
-      pip install -r requirements.txt
-      python -c "import torch; print('PyTorch version:', torch.__version__)"
+      pip install -r requirements-render-compatible.txt
     startCommand: uvicorn api:app --host 0.0.0.0 --port $PORT --workers 1 --log-level info
     envVars:
       - key: PYTHON_VERSION
@@ -27,7 +26,7 @@ services:
     env: python
     buildCommand: |
       pip install --upgrade pip
-      pip install -r requirements.txt
+      pip install -r requirements-render-compatible.txt
     startCommand: python start_dashboard_render.py
     envVars:
       - key: PYTHON_VERSION

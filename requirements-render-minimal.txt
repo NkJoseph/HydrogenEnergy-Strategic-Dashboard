@@ -1,0 +1,26 @@
+# Minimal Render.com requirements
+# Avoids all compilation issues
+
+# Core back-end
+fastapi==0.111.0
+uvicorn==0.29.0
+pydantic==2.7.4
+gunicorn
+
+# Front-end
+dash==2.18.0
+dash-bootstrap-components==1.6.0
+plotly==5.23.0
+
+# Data processing (minimal)
+numpy==1.26.4
+pandas==2.2.2
+
+# HTTP utilities
+requests==2.32.3
+
+# Configuration
+config==0.5.1
+
+# No PyTorch, no heavy ML libraries
+# No compilation dependencies

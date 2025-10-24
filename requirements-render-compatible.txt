@@ -1,0 +1,37 @@
+# Render.com compatible requirements
+# Uses pre-built wheels to avoid Rust compilation issues
+
+# Core back-end
+fastapi==0.111.0
+uvicorn[standard]==0.29.0
+pydantic==2.7.4  # Fixed version with pre-built wheels
+gunicorn
+
+# Front-end
+dash==2.18.0
+dash-bootstrap-components==1.6.0
+plotly==5.23.0
+
+# PyTorch CPU-only (smaller, faster)
+torch==2.1.0+cpu --index-url https://download.pytorch.org/whl/cpu
+
+# Essential data processing
+numpy==1.26.4  # Fixed version
+pandas==2.2.2  # Fixed version
+
+# Visualization
+matplotlib==3.9.0  # Fixed version
+
+# HTTP utilities
+requests==2.32.3  # Fixed version
+
+# Configuration
+config==0.5.1
+
+# Removed heavy dependencies that cause build issues:
+# - torchdiffeq (Rust compilation issues)
+# - stable-baselines3 (too heavy)
+# - gym (too heavy)
+# - scikit-learn (optional)
+# - seaborn (optional)
+# - pytest (testing only)
