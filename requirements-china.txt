@@ -1,0 +1,30 @@
+# China-optimized requirements
+# Compatible with Railway, Vercel, Heroku, etc.
+
+# Core back-end
+fastapi==0.111.0
+uvicorn==0.29.0
+pydantic==2.7.4
+gunicorn
+
+# Front-end
+dash==2.18.0
+dash-bootstrap-components==1.6.0
+plotly==5.23.0
+
+# Data processing
+numpy==1.26.4
+pandas==2.2.2
+
+# Visualization
+matplotlib==3.9.0
+
+# HTTP utilities
+requests==2.32.3
+
+# Configuration
+config==0.5.1
+
+# No heavy dependencies
+# No compilation requirements
+# Optimized for China deployment

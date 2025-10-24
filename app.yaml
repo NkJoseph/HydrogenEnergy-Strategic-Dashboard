@@ -1,0 +1,14 @@
+# Google Cloud App Engine configuration
+runtime: python311
+
+env_variables:
+  PORT: 8080
+  PYTHON_VERSION: "3.11"
+
+automatic_scaling:
+  min_instances: 0
+  max_instances: 2
+
+handlers:
+- url: /.*
+  script: auto
