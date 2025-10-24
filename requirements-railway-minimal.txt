@@ -1,0 +1,29 @@
+# Railway minimal requirements
+# Optimized for Railway free tier
+
+# Core back-end (minimal)
+fastapi==0.111.0
+uvicorn==0.29.0
+pydantic==2.7.4
+
+# Front-end (minimal)
+dash==2.18.0
+dash-bootstrap-components==1.6.0
+plotly==5.23.0
+
+# Data processing (minimal)
+numpy==1.26.4
+pandas==2.2.2
+
+# HTTP utilities
+requests==2.32.3
+
+# Configuration
+config==0.5.1
+
+# Removed for Railway free tier:
+# - matplotlib (heavy)
+# - torch (very heavy)
+# - scikit-learn (heavy)
+# - seaborn (heavy)
+# - gunicorn (not needed for Railway)
