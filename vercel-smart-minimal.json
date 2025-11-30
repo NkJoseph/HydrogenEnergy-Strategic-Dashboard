@@ -1,0 +1,35 @@
+{
+  "version": 2,
+  "builds": [
+    {
+      "src": "dashboard.py",
+      "use": "@vercel/python"
+    },
+    {
+      "src": "api.py",
+      "use": "@vercel/python"
+    }
+  ],
+  "routes": [
+    {
+      "src": "/api/(.*)",
+      "dest": "api.py"
+    },
+    {
+      "src": "/(.*)",
+      "dest": "dashboard.py"
+    }
+  ],
+  "env": {
+    "PYTHONUNBUFFERED": "1",
+    "PYTHON_VERSION": "3.11"
+  },
+  "functions": {
+    "dashboard.py": {
+      "maxDuration": 30
+    },
+    "api.py": {
+      "maxDuration": 30
+    }
+  }
+}

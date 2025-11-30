@@ -2,6 +2,7 @@
 # Exclude large files from Vercel deployment
 
 # Large model files
+# Note: If models are needed, comment out these lines
 pretrained-models/
 processed_data/
 *.pt
