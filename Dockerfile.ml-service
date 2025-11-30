@@ -1,0 +1,43 @@
+# Dockerfile for ML Service on Google Cloud Run
+FROM python:3.11-slim
+
+# Set environment variables
+ENV PYTHONDONTWRITEBYTECODE=1 \
+    PYTHONUNBUFFERED=1 \
+    DEBIAN_FRONTEND=noninteractive
+
+# Set working directory
+WORKDIR /app
+
+# Install system dependencies
+RUN apt-get update && apt-get install -y --no-install-recommends \
+    curl \
+    ca-certificates \
+    && apt-get clean \
+    && rm -rf /var/lib/apt/lists/*
+
+# Copy requirements
+COPY requirements-ml-service.txt requirements.txt
+
+# Install Python dependencies
+RUN pip install --no-cache-dir --upgrade pip && \
+    pip install --no-cache-dir -r requirements.txt
+
+# Copy ML service code
+COPY ml_service.py .
+
+# Copy model files
+COPY pretrained-models/ ./pretrained-models/
+
+# Create directories if they don't exist
+RUN mkdir -p pretrained-models/global pretrained-models/regional
+
+# Expose port
+EXPOSE 8080
+
+# Health check
+HEALTHCHECK --interval=30s --timeout=10s --start-period=5s --retries=3 \
+    CMD curl -f http://localhost:8080/health || exit 1
+
+# Run service
+CMD ["uvicorn", "ml_service:app", "--host", "0.0.0.0", "--port", "8080"]

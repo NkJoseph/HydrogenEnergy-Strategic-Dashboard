@@ -10,7 +10,7 @@ Run with:  uvicorn api:app --reload --port 8000
 """
 
 from __future__ import annotations
-import hashlib, random, json, pickle, datetime
+import hashlib, random, json, pickle, datetime, os
 from pathlib import Path
 from typing import List, Dict, Literal
 
@@ -22,6 +22,13 @@ try:
     import torch          # type: ignore
 except ModuleNotFoundError:   # allow running without CUDA / torch
     torch = None
+
+# ───────── ML Service Configuration ────────────────────────────────
+ML_SERVICE_URL = os.getenv("ML_SERVICE_URL", "")
+try:
+    import requests
+except ImportError:
+    requests = None
 
 # ───────── Canonical lists ──────────────────────────────────────
 REGIONS: List[str] = [
@@ -106,6 +113,25 @@ class DummyModel:
         return np.array(yearly_values, dtype=float)
 
 def _yearly_series(region: str, scenario: str, years: list[int]) -> np.ndarray:
+    # Try Cloud Run ML service first if configured
+    if ML_SERVICE_URL and requests:
+        try:
+            response = requests.post(
+                f"{ML_SERVICE_URL}/predict",
+                json={
+                    "region": region,
+                    "scenario": scenario,
+                    "years": years
+                },
+                timeout=30
+            )
+            if response.status_code == 200:
+                data = response.json()
+                return np.array(data["predictions"], dtype=float)
+        except Exception as e:
+            print(f"[WARNING] ML service unavailable, using fallback: {e}")
+    
+    # Fallback to local model loading (existing code)
     model_path = _weight_path(region, scenario)
     sd = _safe_torch_load(model_path)
     

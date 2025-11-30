@@ -1,0 +1,16 @@
+# ML Service Requirements for Google Cloud Run
+# Minimal dependencies for ML inference only
+
+# Core back-end
+fastapi==0.111.0
+uvicorn[standard]==0.29.0
+pydantic==2.7.4
+
+# PyTorch (CPU-only for Cloud Run)
+torch==2.1.0+cpu
+
+# Essential data processing
+numpy==1.26.4
+
+# HTTP utilities (for health checks)
+requests==2.32.3

@@ -16,6 +16,8 @@ services:
         value: 1
       - key: HYDROGEN_API_URL
         value: https://hydrogen-api.onrender.com
+      - key: ML_SERVICE_URL
+        value: https://hydrogen-ml-service-XXXXX.run.app  # Replace with your Cloud Run URL after deployment
     healthCheckPath: /health
     plan: starter
     region: oregon

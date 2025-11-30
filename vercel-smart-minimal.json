@@ -22,7 +22,8 @@
   ],
   "env": {
     "PYTHONUNBUFFERED": "1",
-    "PYTHON_VERSION": "3.11"
+    "PYTHON_VERSION": "3.11",
+    "HYDROGEN_API_URL": "https://hydrogen-api.onrender.com"
   },
   "functions": {
     "dashboard.py": {
