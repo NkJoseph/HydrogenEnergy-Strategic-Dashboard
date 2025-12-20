@@ -1,0 +1,21 @@
+version: 1.0
+runtime: python3
+build:
+  commands:
+    build:
+      - echo "Installing dependencies..."
+      - pip install --upgrade pip
+      - pip install -r requirements.txt
+run:
+  runtime-version: 3.11
+  command: python dashboard.py
+  network:
+    port: 8050
+    env: PORT
+  env:
+    - name: PORT
+      value: "8050"
+    - name: HYDROGEN_API_URL
+      value: "REPLACE_WITH_API_URL"
+    - name: PYTHONUNBUFFERED
+      value: "1"

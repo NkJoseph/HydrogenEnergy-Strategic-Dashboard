@@ -301,7 +301,7 @@ def make_app(theme: str = DEFAULT_THEME, language: str = DEFAULT_LANGUAGE) -> da
         ], 
         suppress_callback_exceptions=True,
         title="Global Hydrogen Production Simulation Tool",
-        server_url='/',
+        
         routes_pathname_prefix='/'
     )
     server = app.server
